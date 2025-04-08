@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "apartments",
+  "info": {
+    "singularName": "apartment",
+    "pluralName": "apartments",
+    "displayName": "Apartment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Floor": {
+      "type": "integer"
+    },
+    "Door": {
+      "type": "integer"
+    },
+    "M": {
+      "type": "biginteger"
+    },
+    "T": {
+      "type": "integer"
+    },
+    "Photo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Statut": {
+      "type": "string"
+    },
+    "Rent": {
+      "type": "biginteger"
+    },
+    "building": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::building.building",
+      "inversedBy": "apartments"
+    }
+  }
+}

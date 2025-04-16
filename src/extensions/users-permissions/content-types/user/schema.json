@@ -70,6 +70,12 @@
       "relation": "manyToMany",
       "target": "api::apartment.apartment",
       "inversedBy": "users"
+    },
+    "tasks": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::task.task",
+      "mappedBy": "Userrelated"
     }
   }
 }

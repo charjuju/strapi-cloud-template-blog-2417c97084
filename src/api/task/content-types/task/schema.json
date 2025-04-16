@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tasks",
+  "info": {
+    "singularName": "task",
+    "pluralName": "tasks",
+    "displayName": "Task",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Statustask": {
+      "type": "string"
+    },
+    "Userrelated": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "tasks"
+    },
+    "apartment": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::apartment.apartment",
+      "inversedBy": "task"
+    }
+  }
+}

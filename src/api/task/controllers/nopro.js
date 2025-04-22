@@ -49,5 +49,45 @@ module.exports = createCoreController('api::task.task', () => ({
             console.error("Erreur lors de la récupération des tâches non pro:", error);
             ctx.throw(500, 'Erreur interne du serveur');
         }
+    },
+    // Nouvelle méthode : récupérer les tâches liées à l'utilisateur connecté
+    async myTasks(ctx) {
+        try {
+            const user = ctx.state.user; // Récupérer l'utilisateur connecté
+            if (!user) {
+                return ctx.unauthorized('Utilisateur non authentifié');
+            }
+    
+            console.log(`Recherche des tâches associées à l'utilisateur ID: ${user.id}`);
+    
+            // Chercher les tâches où Userrelated contient cet utilisateur
+            const tasks = await strapi.query('api::task.task').findMany({
+                populate: ['Userrelated'],
+                where: {
+                    Userrelated: {
+                        id: user.id
+                    }
+                }
+            });
+    
+            console.log(`Tâches liées à l'utilisateur ${user.id} avant suppression des doublons :`, tasks);
+    
+            // Suppression des doublons basés sur documentId
+            const uniqueTasks = [];
+            const seenDocumentIds = new Set();
+    
+            for (const task of tasks) {
+                if (!seenDocumentIds.has(task.documentId)) {
+                    seenDocumentIds.add(task.documentId);
+                    uniqueTasks.push(task);
+                }
+            }
+    
+            console.log(`Tâches uniques à envoyer à l'utilisateur ${user.id} :`, uniqueTasks);
+            ctx.send(uniqueTasks);
+        } catch (error) {
+            console.error("Erreur lors de la récupération des tâches liées à l'utilisateur:", error);
+            ctx.throw(500, 'Erreur interne du serveur');
+        }
     }
 }));

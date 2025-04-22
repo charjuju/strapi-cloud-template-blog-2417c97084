@@ -76,6 +76,12 @@
       "relation": "manyToMany",
       "target": "api::task.task",
       "mappedBy": "Userrelated"
+    },
+    "Favorites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::apartment.apartment",
+      "mappedBy": "UserFavorites"
     }
   }
 }

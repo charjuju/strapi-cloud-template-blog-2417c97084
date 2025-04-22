@@ -58,6 +58,12 @@
       "relation": "oneToOne",
       "target": "api::task.task",
       "mappedBy": "apartment"
+    },
+    "UserFavorites": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "Favorites"
     }
   }
 }

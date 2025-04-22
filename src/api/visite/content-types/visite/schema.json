@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "visites",
+  "info": {
+    "singularName": "visite",
+    "pluralName": "visites",
+    "displayName": "Visite"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "start": {
+      "type": "datetime",
+      "default": "2025-03-31T22:00:00.000Z",
+      "required": true
+    },
+    "end": {
+      "type": "datetime",
+      "required": true,
+      "default": "2025-03-31T22:15:00.000Z"
+    }
+  }
+}
